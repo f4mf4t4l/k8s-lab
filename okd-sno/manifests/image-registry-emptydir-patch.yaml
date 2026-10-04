@@ -1,0 +1,7 @@
+# Aktiviert die interne Registry mit emptyDir-Storage.
+# Nur fuers Lab: Images gehen bei Pod-Neustart verloren.
+# Fuer persistenten Storage stattdessen ein PVC verwenden (siehe README).
+spec:
+  managementState: Managed
+  storage:
+    emptyDir: {}

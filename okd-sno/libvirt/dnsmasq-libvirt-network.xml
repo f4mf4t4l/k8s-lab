@@ -1,0 +1,32 @@
+<!--
+  Alternative zu einem separaten DNS-Server: das libvirt-"default"-Netz
+  liefert die SNO-Eintraege selbst aus (inkl. *.apps-Wildcard ueber dnsmasq-Option).
+  Anwenden:
+    sudo virsh net-destroy default
+    sudo virsh net-undefine default
+    sudo virsh net-define libvirt/dnsmasq-libvirt-network.xml
+    sudo virsh net-start default && sudo virsh net-autostart default
+-->
+<network xmlns:dnsmasq="http://libvirt.org/schemas/network/dnsmasq/1.0">
+  <name>default</name>
+  <forward mode="nat"/>
+  <bridge name="virbr0" stp="on" delay="0"/>
+  <domain name="sno.lab.local" localOnly="yes"/>
+  <dns>
+    <host ip="192.168.122.10">
+      <hostname>api.sno.lab.local</hostname>
+      <hostname>api-int.sno.lab.local</hostname>
+      <hostname>sno.sno.lab.local</hostname>
+    </host>
+  </dns>
+  <ip address="192.168.122.1" netmask="255.255.255.0">
+    <dhcp>
+      <range start="192.168.122.100" end="192.168.122.254"/>
+      <!-- feste DHCP-Adresse, wichtig fuer bootstrap-in-place -->
+      <host mac="52:54:00:00:00:10" name="sno" ip="192.168.122.10"/>
+    </dhcp>
+  </ip>
+  <dnsmasq:options>
+    <dnsmasq:option value="address=/apps.sno.lab.local/192.168.122.10"/>
+  </dnsmasq:options>
+</network>

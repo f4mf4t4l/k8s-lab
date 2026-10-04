@@ -1,0 +1,8 @@
+# Minimal-Variante fuer den Admin-Rechner (/etc/hosts), falls kein DNS-Server.
+# ACHTUNG: Reicht NICHT fuer den Knoten selbst – der braucht echtes DNS
+# (api, api-int, *.apps). /etc/hosts kann keine Wildcards, daher die
+# benoetigten Routen einzeln eintragen.
+192.168.122.10  api.sno.lab.local
+192.168.122.10  console-openshift-console.apps.sno.lab.local
+192.168.122.10  oauth-openshift.apps.sno.lab.local
+192.168.122.10  downloads-openshift-console.apps.sno.lab.local

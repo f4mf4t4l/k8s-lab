@@ -1,0 +1,5 @@
+env
+bin/
+work/
+*.iso
+*.tar.gz

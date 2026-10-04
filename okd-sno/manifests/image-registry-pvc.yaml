@@ -1,0 +1,15 @@
+# Optional: persistenter Storage fuer die Registry (braucht eine StorageClass,
+# z.B. LVM Storage / local-path / NFS-Provisioner).
+# Danach:  oc patch configs.imageregistry.operator.openshift.io cluster --type merge \
+#            -p '{"spec":{"managementState":"Managed","rolloutStrategy":"Recreate","storage":{"pvc":{"claim":"image-registry-storage"}}}}'
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: image-registry-storage
+  namespace: openshift-image-registry
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi

@@ -1,0 +1,12 @@
+; BIND-Zonendatei fuer lab.local (Alternative zu dnsmasq)
+; In named.conf:  zone "lab.local" { type master; file "lab.local.db"; };
+$TTL 300
+@       IN SOA  ns1.lab.local. admin.lab.local. ( 2026100401 3600 600 604800 300 )
+        IN NS   ns1.lab.local.
+ns1                 IN A  192.168.122.1
+
+; --- OKD SNO -----------------------------------------------------------------
+api.sno             IN A  192.168.122.10
+api-int.sno         IN A  192.168.122.10
+*.apps.sno          IN A  192.168.122.10
+sno.sno             IN A  192.168.122.10
